@@ -35,7 +35,9 @@ body {
 
 .keyboard__text {
     width: 60vw;
+    height: 158px;
     align-self: center;
+    font-size: 30px;
 }
 
 .keyboard__keys {
