@@ -5,8 +5,6 @@ function initPage() {
     const body = document.querySelector('body');
     const page = createPage();
 
-    console.log('pon')
-
     body.append(page);
 }
 
