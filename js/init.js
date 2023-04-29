@@ -1,7 +1,7 @@
-import { createElem } from './create-elem.js';
-import { createKeyboard } from './create-keyboard.js';
+import createElem from './create-elem.js';
+import createKeyboard from './create-keyboard.js';
 
-function initPage() {
+export default function initPage() {
     const body = document.querySelector('body');
     const page = createPage();
 
@@ -29,5 +29,3 @@ function createPage() {
 
     return wrapper
 }
-
-export { initPage }

@@ -73,9 +73,11 @@ body {
     font-size: 20px;
     position: relative;
 }
+
 .keyboard__key:hover {
     opacity: 0.5;
 }
+
 .keyboard__key:active {
     opacity: 1;
     background-color: var(--active-key-color);
@@ -98,4 +100,23 @@ body {
     position: absolute;
     left: 5px;
     top: 5px;
+}
+
+@keyframes key-down {
+    from {
+        left: 0;
+        top: 0;
+    }
+
+    to {
+        left: 3px;
+        top: 3px;
+    }
+}
+
+.keyboard__key_active {
+    animation: key-down 0.3s;
+    color: var(--active-key-color);
+    left: 3px;
+    top: 3px;
 }

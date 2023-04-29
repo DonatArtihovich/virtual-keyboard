@@ -1,8 +1,8 @@
-import { createElem } from './create-elem.js'
+import createElem from './create-elem.js'
 import * as Data from './data.js'
 
 
-function createKeyboard() {
+export default function createKeyboard() {
     const keysContainer = createElem('div', 'keyboard__keys');
     for (let i = 0; i < Data.keysArr.length; i++) {
         const key = createKey(i);
@@ -46,5 +46,3 @@ function getKeyContent(index) {
     const keyContent = (Data.keysDataContent.hasOwnProperty(key)) ? Data.keysDataContent[key]['ru'][0] : Data.keysSpecialDataContent[key]
     return keyContent
 }
-
-export { createKeyboard }

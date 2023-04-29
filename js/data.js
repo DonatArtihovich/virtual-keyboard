@@ -57,8 +57,9 @@ export const keysSpecialDataContent = {
   ShiftLeft: 'Shift',
   ShiftRight: 'Shift',
   ArrowUp: '↑',
-  ctrlKey: 'Ctrl',
-  metaKey: '⊞',
+  ControlLeft: 'Ctrl',
+  ControlRight: 'Ctrl',
+  MetaLeft: '⊞',
   AltLeft: 'Alt',
   AltRight: 'Alt',
   Space: ' ',
@@ -78,7 +79,7 @@ export const keysArr = ['Backquote', 'Digit1', 'Digit2',
   'Semicolon', 'Quote', 'Enter', 'ShiftLeft', 'Backslash', 'KeyZ',
   'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM',
   'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight',
-  'ctrlKey', 'metaKey', 'AltLeft', 'Space', 'AltRight',
-  'ctrlKey', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
+  'ControlLeft', 'MetaLeft', 'AltLeft', 'Space', 'AltRight',
+  'ControlRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
 
 export const doubleKeysArr = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft'];
