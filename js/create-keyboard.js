@@ -17,7 +17,7 @@ function createKey(index) {
     const keyContent = getKeyContent(index);
     const key = createElem('button', keyClasslist, keyContent);
     key.dataset.key = Data.keysArr[index];
-    console.log(key, Data.keysDataContent)
+    
     if(index < 13 && index > 0) {
         const keySpan = createElem('span', 'up-content', Data.keysDataContent[Data.keysArr[index]]['ru'][1]);
         key.prepend(keySpan)
