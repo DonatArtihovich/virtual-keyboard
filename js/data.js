@@ -24,7 +24,7 @@ export const keysDataContent = {
     KeyP: { en: ['p', 'P'], ru: ['з', 'З'] },
     BracketLeft: { en: ['[', '{'], ru: ['х', 'Х'] },
     BracketRight: { en: [']', '}'], ru: ['ъ', 'Ъ'] },
-    Backslash: { en: [' \ ', '|'], ru: [' \ ', '|'] },
+    Backslash: { en: ['\\', '|'], ru: ['\\', '|'] },
     KeyA: { en: ['a', 'A'], ru: ['ф', 'Ф'] },
     KeyS: { en: ['s', 'S'], ru: ['ы', 'Ы'] },
     KeyD: { en: ['d', 'D'], ru: ['в', 'В'] },
