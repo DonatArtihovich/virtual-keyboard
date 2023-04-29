@@ -27,8 +27,9 @@ function createPage() {
     const keyboardHelpPartTwo = createElem('p', 'keyboard__help-text', 'Переключение языка ввода: левые Alt + Shift');
 
     keyboard.append(keyboardHeaderWrapper, textArea, keyboardElement, keyboardHelpPartOne, keyboardHelpPartTwo);
+    wrapper.append(keyboard);
 
-    return keyboard
+    return wrapper
 }
 
 export { initPage }
