@@ -22,17 +22,17 @@ function handleVirtualKey(event) {
     if(Data.keysDataContent[keyName]) {
         enterText(keyName, onShift, onCaps)
     } else {
-        handleSpecialKey(keyName)
+        handleSpecialKey(keyName, event)
     }
 }
 
-function handleSpecialKey(key) {
+function handleSpecialKey(key, e) {
     switch(key) {
-        case 'Space': enterText(Data.spaceContents['Space']);
-        case 'Tab': enterText(Data.spaceContents['Tab']);
-        case 'CapsLock': Special.handleCaps();
-        case 'Backspace': Special.handleBackspace();
-        case 'Delete': Special.handleDelete();
+        case 'Space': enterText('Space');
+        case 'Tab': enterText('Tab');
+        case 'CapsLock': Special.handleCaps(e);
+        case 'Backspace': Special.handleBackspace(e);
+        case 'Delete': Special.handleDelete(e);
     }
 }
 
@@ -42,7 +42,7 @@ function handleKeyDown(event, b) {
         case 'ShiftRight': Special.handleShift(b)
         case 'AltLeft': Special.handleAlt(b);
         case 'AltRight': Special.handleAlt(b);
-        case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps();
+        case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps(event);
     }
 }
 

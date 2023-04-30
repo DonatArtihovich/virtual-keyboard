@@ -8,21 +8,24 @@ let onCaps = false;
 function handleShift(b, isLeft) {
     onShift = b;
     if(b && onAlt && isLeft) {
-        console.log(event.type, onShift, onAlt)
         changeKeyboardLanguage();
     }
 }
 
-function handleCaps() {
+function handleCaps(e) {
+    if (e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock') {
     onCaps = !onCaps;
     recreatePage(onCaps)
+  } else return
+   
 }
 
 function handleAlt(b) {
     onAlt = b
 }
 
-function handleBackspace() {
+function handleBackspace(e) {
+    if (e.target.dataset.key !== 'Backspace') return
     const textArea = document.querySelector('.keyboard__text');
     if(!textArea.selectionStart) return
     let selectionStart = textArea.selectionStart;
@@ -34,7 +37,8 @@ function handleBackspace() {
     textArea.setSelectionRange(selectionStart, selectionStart)
 }
 
-function handleDelete() {
+function handleDelete(e) {
+    if (e.target.dataset.key !== 'Delete') return
     const textArea = document.querySelector('.keyboard__text');
     const selectionStart = textArea.selectionStart;
 
