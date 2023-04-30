@@ -1,16 +1,21 @@
 import changeKeyboardLanguage from './language.js'
+import recreatePage from './recreate-page.js'
 
 let onShift = false;
 let onAlt = false;
 let onCaps = false;
 
-function handleShift(b) {
+function handleShift(b, isLeft) {
     onShift = b;
-    if(onAlt) changeKeyboardLanguage();
+    if(b && onAlt && isLeft) {
+        console.log(event.type, onShift, onAlt)
+        changeKeyboardLanguage();
+    }
 }
 
 function handleCaps() {
     onCaps = !onCaps;
+    recreatePage(onCaps)
 }
 
 function handleAlt(b) {
@@ -22,7 +27,6 @@ function handleBackspace() {
     if(!textArea.selectionStart) return
     let selectionStart = textArea.selectionStart;
     let textAreaValue = textArea.value.split('');
-    console.log(textAreaValue)
     textAreaValue.splice(selectionStart - 1, 1);
 
     textArea.value = textAreaValue.join('');

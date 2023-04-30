@@ -38,7 +38,7 @@ function handleSpecialKey(key) {
 
 function handleKeyDown(event, b) {
     switch(event.code) {
-        case 'ShiftLeft': Special.handleShift(b);
+        case 'ShiftLeft': Special.handleShift(b, true);
         case 'ShiftRight': Special.handleShift(b)
         case 'AltLeft': Special.handleAlt(b);
         case 'AltRight': Special.handleAlt(b);

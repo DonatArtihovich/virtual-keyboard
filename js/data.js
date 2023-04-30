@@ -88,3 +88,5 @@ export const spaceContents = {
   Space: { en: [' ', ' '], ru: ['\u00A0', ' '] },
   Tab: { en: ['\ \ \ ', '\ '], ru: ['\ \ \ ', '\ '] }
 }
+
+export const unCapsKeyIndex = ['Backslash', 'BracketLeft', 'BracketRight', 'Semicolon', 'Quote', 'Comma', 'Period', 'Slash']
