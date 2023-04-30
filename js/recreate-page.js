@@ -7,8 +7,8 @@ export default function redrawKeyboard(caps) {
 
     for(let i = 0; i < keys.length; i++) {
         key = keys[i];
-        index = (caps && !((i > 0 && i < 14) || (language === 'en' && i < 14)) && !Data.unCapsKeyIndex.includes(key.dataset.key)) ? 1 : 0
-        console.log(key.classList.contains('.special-key'))
+        index = (caps && !((i > 0 && i < 14) || (language === 'en' && i < 14)) && (!Data.unCapsKeyIndex.includes(key.dataset.key) || (language === 'ru' && key.dataset.key !== 'Backslash' && key.dataset.key !== 'Slash'))) ? 1 : 0
+        
         if(key.classList.contains('special-key')) continue;
         key.textContent = Data.keysDataContent[key.dataset.key][language][index];
 
