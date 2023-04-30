@@ -67,11 +67,12 @@ body {
     width: 4vw;
     height: 4vw;
     padding: 0;
+    position: relative;
     border-radius: 10px;
     background-color: var(--key-color);
     color: var(--key-text-color);
     font-size: 20px;
-    position: relative;
+    cursor: pointer;
 }
 
 .keyboard__key:hover {
