@@ -4,22 +4,26 @@ import * as Data from './data.js'
 
 export default function createKeyboard() {
     const keysContainer = createElem('div', 'keyboard__keys');
+    const myStorage = window.localStorage;
+    if(!myStorage.getItem('language')) myStorage.setItem('language', 'en')
+    const keyLanguage = myStorage.getItem('language');
+
     for (let i = 0; i < Data.keysArr.length; i++) {
-        const key = createKey(i);
+        const key = createKey(i, keyLanguage);
         keysContainer.append(key)
     }
 
     return keysContainer
 }
 
-function createKey(index) {
+function createKey(index, lang) {
     const keyClasslist = getKeyClasslist(index);
-    const keyContent = getKeyContent(index);
+    const keyContent = getKeyContent(index, lang);
     const key = createElem('button', keyClasslist, keyContent);
     key.dataset.key = Data.keysArr[index];
     
     if(index < 13 && index > 0) {
-        const keySpan = createElem('span', 'up-content', Data.keysDataContent[Data.keysArr[index]]['ru'][1]);
+        const keySpan = createElem('span', 'up-content', Data.keysDataContent[Data.keysArr[index]][lang][1]);
         key.prepend(keySpan)
     }
    
@@ -41,8 +45,8 @@ function getKeyClasslist(index) {
     return classesArr
 }
 
-function getKeyContent(index) {
+function getKeyContent(index, lang) {
     const key = Data.keysArr[index];
-    const keyContent = (Data.keysDataContent.hasOwnProperty(key)) ? Data.keysDataContent[key]['ru'][0] : Data.keysSpecialDataContent[key]
+    const keyContent = (Data.keysDataContent.hasOwnProperty(key)) ? Data.keysDataContent[key][lang][0] : Data.keysSpecialDataContent[key]
     return keyContent
 }
