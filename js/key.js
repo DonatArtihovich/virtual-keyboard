@@ -28,8 +28,9 @@ function handleVirtualKey(event) {
 
 function handleSpecialKey(key, e) {
     switch(key) {
-        case 'Space': enterText('Space');
-        case 'Tab': enterText('Tab');
+        case 'Space': Special.handleSpace(e);
+        case 'Tab': Special.handleTab(e);
+        case 'Enter': Special.handleEnter(e);
         case 'CapsLock': Special.handleCaps(e);
         case 'Backspace': Special.handleBackspace(e);
         case 'Delete': Special.handleDelete(e);

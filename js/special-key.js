@@ -1,5 +1,6 @@
 import changeKeyboardLanguage from './language.js'
 import recreatePage from './recreate-page.js'
+import enterText from './enter-text.js'
 
 let onShift = false;
 let onAlt = false;
@@ -49,4 +50,19 @@ function handleDelete(e) {
     textArea.setSelectionRange(selectionStart, selectionStart)
 }
 
-export { handleShift, handleCaps, handleAlt, handleBackspace, handleDelete, onShift, onCaps, onAlt }
+function handleEnter(e) {
+  if (e.target.dataset.key !== 'Enter') return
+  enterText('Enter');
+}
+
+function handleTab(e) {
+  if (e.target.dataset.key !== 'Tab') return
+  enterText('Tab');
+}
+
+function handleSpace(e) {
+  if (e.target.dataset.key !== 'Space') return
+  enterText('Space');
+}
+
+export { handleShift, handleCaps, handleAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, onShift, onCaps, onAlt }
