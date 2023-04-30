@@ -5,6 +5,7 @@ import enterText from './enter-text.js'
 let onShift = false;
 let onAlt = false;
 let onCaps = false;
+let onControl = false;
 
 function handleLeftShift(b, e) {
   if (e.code === 'ShiftLeft' ) {
@@ -13,7 +14,7 @@ function handleLeftShift(b, e) {
     redrawKeyboard(onShift, onShift);
 
     if(b && onAlt && e.code === 'ShiftLeft') {
-        changeKeyboardLanguage();
+        changeKeyboardLanguage(onCaps);
     }
   }
 }
@@ -82,26 +83,80 @@ function handleSpace(e) {
   enterText('Space');
 }
 
-function handleSideArrow(e) {
-  if(e.target.dataset.key !== 'ArrowRight' && e.target.dataset.key !== 'ArrowLeft') return
+function handleLeftControl(b) {
+  onControl = b;
+}
+
+function handleRightControl(b) {
+  onControl = b;
+}
+
+// function handleSideArrow(e) {
+//   if(e.target.dataset.key !== 'ArrowRight' && e.target.dataset.key !== 'ArrowLeft') return
+
+
+//   console.log('target: ', e.target, '\n', 'code: ', e.code)
+//   if(e.target.dataset.key === 'ArrowRight') {
+//     selectionStart += 1;
+//   } else if(e.target.dataset.key === 'ArrowLeft') {
+//     if(!selectionStart) return
+//     selectionStart--;
+//   }
+// }
+
+function handleLeftArrow(e) {
+  if(e.target.dataset.key !== 'ArrowLeft') return;
   const textArea = document.querySelector('.keyboard__text');
   if(!textArea.value.length) return
   let selectionStart = textArea.selectionStart;
-
-  console.log('target: ', e.target, '\n', 'code: ', e.code)
-  if(e.target.dataset.key === 'ArrowRight') {
-    selectionStart += 1;
-  } else if(e.target.dataset.key === 'ArrowLeft') {
-    if(!selectionStart) return
-    selectionStart--;
-  }
   
+  if(onControl && onShift) {
+    textArea.setSelectionRange(selectionStart, selectionStart);
+    textArea.setSelectionRange(0, selectionStart);
+    return
+  }
+
+  if(onControl) {
+    textArea.setSelectionRange(0, 0);
+    return
+  }
+
+  selectionStart--;
   textArea.setSelectionRange(selectionStart, selectionStart);
 }
 
-function handleVerticalArrow() {
+function handleRightArrow(e) {
+  if(e.target.dataset.key !== 'ArrowRight') return;
+  const textArea = document.querySelector('.keyboard__text');
+  if(!textArea.value.length) return
+  let selectionStart = textArea.selectionStart;
+  const textLength = textArea.value.split('').length;
+  
+  if(onControl && onShift) {
+    textArea.setSelectionRange(selectionStart, selectionStart);
+    textArea.setSelectionRange(selectionStart, textLength);
+    return
+  }
+
+  if(onControl) {
+    textArea.setSelectionRange(textLength, textLength);
+    return
+  }
+
+  selectionStart++;
+  textArea.setSelectionRange(selectionStart, selectionStart);
+
+}
+
+function handleUpArrow(e) {
+  if(e.target.dataset.key !== 'ArrowUp') return;
+
+}
+
+function handleDownArrow(e) {
+  if(e.target.dataset.key !== 'ArrowDown') return;
 
 }
 
 
-export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, handleSideArrow, handleVerticalArrow, onShift, onCaps, onAlt }
+export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, handleLeftArrow, handleRightArrow, handleUpArrow, handleDownArrow, handleLeftControl, handleRightControl, onShift, onCaps, onAlt }

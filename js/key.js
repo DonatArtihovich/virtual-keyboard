@@ -34,8 +34,10 @@ function handleSpecialKey(key, e) {
         case 'CapsLock': Special.handleCaps(e);
         case 'Backspace': Special.handleBackspace(e);
         case 'Delete': Special.handleDelete(e);
-        case 'ArrowRight': Special.handleSideArrow(e);
-        case 'ArrowLeft': Special.handleSideArrow(e);
+        case 'ArrowLeft': Special.handleLeftArrow(e);
+        case 'ArrowRight': Special.handleRightArrow(e);
+        case 'ArrowUp': Special.handleUpArrow(e);
+        case 'ArrowDown': Special.handleDownArrow(e);
     }
 }
 
@@ -46,5 +48,7 @@ function handleKeyDown(event, b) {
         case 'AltLeft': Special.handleLeftAlt(b);
         case 'AltRight': Special.handleRightAlt(b);
         case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps(event);
+        case 'ControlLeft': Special.handleLeftControl(b);
+        case 'ControlRight': Special.handleRightControl(b);
     }
 }
