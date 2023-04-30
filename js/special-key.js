@@ -14,7 +14,7 @@ function handleShift(b, isLeft, e) {
         changeKeyboardLanguage();
     }
     
-    redrawKeyboard(onShift)
+    redrawKeyboard(onShift, onShift)
   }
 }
 
