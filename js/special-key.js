@@ -91,19 +91,6 @@ function handleRightControl(b) {
   onControl = b;
 }
 
-// function handleSideArrow(e) {
-//   if(e.target.dataset.key !== 'ArrowRight' && e.target.dataset.key !== 'ArrowLeft') return
-
-
-//   console.log('target: ', e.target, '\n', 'code: ', e.code)
-//   if(e.target.dataset.key === 'ArrowRight') {
-//     selectionStart += 1;
-//   } else if(e.target.dataset.key === 'ArrowLeft') {
-//     if(!selectionStart) return
-//     selectionStart--;
-//   }
-// }
-
 function handleLeftArrow(e) {
   if(e.target.dataset.key !== 'ArrowLeft') return;
   const textArea = document.querySelector('.keyboard__text');
@@ -150,12 +137,22 @@ function handleRightArrow(e) {
 
 function handleUpArrow(e) {
   if(e.target.dataset.key !== 'ArrowUp') return;
+  const textArea = document.querySelector('.keyboard__text');
+  let selectionStart = textArea.selectionStart - textArea.cols + 1;
 
+  if(onControl) selectionStart = 0;
+
+  textArea.setSelectionRange(selectionStart, selectionStart);
 }
 
 function handleDownArrow(e) {
   if(e.target.dataset.key !== 'ArrowDown') return;
+  const textArea = document.querySelector('.keyboard__text');
+  let selectionStart = textArea.selectionStart + textArea.cols - 1;
 
+  if(onControl) selectionStart = textArea.value.split('').length;
+
+  textArea.setSelectionRange(selectionStart, selectionStart);
 }
 
 
