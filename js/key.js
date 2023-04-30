@@ -6,7 +6,7 @@ import enterText from './enter-text.js';
 export default function addKeyEvents() {
     const keyboard = document.querySelector('.keyboard__keys');
     
-    keyboard.addEventListener('mousedown', handleVirtualKey);
+    keyboard.addEventListener('mousedown', e => { handleVirtualKey(e) });
     window.addEventListener('keydown', e => { handleKeyDown(e, true) });
     window.addEventListener('keyup', e => { handleKeyDown(e, false) });
 
@@ -34,15 +34,17 @@ function handleSpecialKey(key, e) {
         case 'CapsLock': Special.handleCaps(e);
         case 'Backspace': Special.handleBackspace(e);
         case 'Delete': Special.handleDelete(e);
+        case 'ArrowRight': Special.handleSideArrow(e);
+        case 'ArrowLeft': Special.handleSideArrow(e);
     }
 }
 
 function handleKeyDown(event, b) {
     switch(event.code) {
-        case 'ShiftLeft': Special.handleShift(b, true, event);
-        case 'ShiftRight': Special.handleShift(b, false, event)
-        case 'AltLeft': Special.handleAlt(b, event);
-        case 'AltRight': Special.handleAlt(b, event);
+        case 'ShiftLeft': Special.handleLeftShift(b, event);
+        case 'ShiftRight': Special.handleRightShift(b, event)
+        case 'AltLeft': Special.handleLeftAlt(b);
+        case 'AltRight': Special.handleRightAlt(b);
         case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps(event);
     }
 }

@@ -5,8 +5,6 @@ export default function changeKeyboardLanguage() {
     const curLang = myStorage.getItem('language')
     const changedLang = (curLang === 'en') ? 'ru' : 'en';
     
-    console.log('current: ', curLang);
-    console.log('new: ', changedLang);
     myStorage.removeItem('language');
     myStorage.setItem('language', changedLang);
 

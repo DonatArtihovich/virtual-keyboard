@@ -6,15 +6,23 @@ let onShift = false;
 let onAlt = false;
 let onCaps = false;
 
-function handleShift(b, isLeft, e) {
-  if (e.target.dataset.key === 'ShiftLeft' || e.target.dataset.key === 'ShiftRight' || e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
+function handleLeftShift(b, e) {
+  if (e.code === 'ShiftLeft' ) {
     onShift = b;
-    console.log(onShift)
-    if(b && onAlt && isLeft) {
+    
+    redrawKeyboard(onShift, onShift);
+
+    if(b && onAlt && e.code === 'ShiftLeft') {
         changeKeyboardLanguage();
     }
+  }
+}
+
+function handleRightShift(b, e) {
+  if (e.code === 'ShiftRight' ) {
+    onShift = b;
     
-    redrawKeyboard(onShift, onShift)
+    redrawKeyboard(onShift, onShift);
   }
 }
 
@@ -26,10 +34,12 @@ function handleCaps(e) {
    
 }
 
-function handleAlt(b, e) {
-  if (e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock') {
+function handleLeftAlt(b) {
     onAlt = b;
-  }
+}
+
+function handleRightAlt(b) {
+    onAlt = b;
 }
 
 function handleBackspace(e) {
@@ -72,4 +82,26 @@ function handleSpace(e) {
   enterText('Space');
 }
 
-export { handleShift, handleCaps, handleAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, onShift, onCaps, onAlt }
+function handleSideArrow(e) {
+  if(e.target.dataset.key !== 'ArrowRight' && e.target.dataset.key !== 'ArrowLeft') return
+  const textArea = document.querySelector('.keyboard__text');
+  if(!textArea.value.length) return
+  let selectionStart = textArea.selectionStart;
+
+  console.log('target: ', e.target, '\n', 'code: ', e.code)
+  if(e.target.dataset.key === 'ArrowRight') {
+    selectionStart += 1;
+  } else if(e.target.dataset.key === 'ArrowLeft') {
+    if(!selectionStart) return
+    selectionStart--;
+  }
+  
+  textArea.setSelectionRange(selectionStart, selectionStart);
+}
+
+function handleVerticalArrow() {
+
+}
+
+
+export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, handleSideArrow, handleVerticalArrow, onShift, onCaps, onAlt }
