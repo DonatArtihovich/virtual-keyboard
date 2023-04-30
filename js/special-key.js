@@ -1,28 +1,35 @@
 import changeKeyboardLanguage from './language.js'
-import recreatePage from './recreate-page.js'
+import redrawKeyboard from './recreate-page.js'
 import enterText from './enter-text.js'
 
 let onShift = false;
 let onAlt = false;
 let onCaps = false;
 
-function handleShift(b, isLeft) {
+function handleShift(b, isLeft, e) {
+  if (e.target.dataset.key === 'ShiftLeft' || e.target.dataset.key === 'ShiftRight' || e.code === 'ShiftLeft' || e.code === 'ShiftRight') {
     onShift = b;
+    console.log(onShift)
     if(b && onAlt && isLeft) {
         changeKeyboardLanguage();
     }
+    
+    redrawKeyboard(onShift)
+  }
 }
 
 function handleCaps(e) {
     if (e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock') {
     onCaps = !onCaps;
-    recreatePage(onCaps)
+    redrawKeyboard(onCaps)
   } else return
    
 }
 
-function handleAlt(b) {
-    onAlt = b
+function handleAlt(b, e) {
+  if (e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock') {
+    onAlt = b;
+  }
 }
 
 function handleBackspace(e) {

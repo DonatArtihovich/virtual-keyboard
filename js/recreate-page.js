@@ -1,6 +1,6 @@
 import * as Data from './data.js';
 
-export default function redrawKeyboard(caps) {
+export default function redrawKeyboard(caps, shift) {
     const keys = document.querySelectorAll('.keyboard__key');
     const language = window.localStorage.getItem('language');
     let key, index;

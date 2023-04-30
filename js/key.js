@@ -39,13 +39,10 @@ function handleSpecialKey(key, e) {
 
 function handleKeyDown(event, b) {
     switch(event.code) {
-        case 'ShiftLeft': Special.handleShift(b, true);
-        case 'ShiftRight': Special.handleShift(b)
-        case 'AltLeft': Special.handleAlt(b);
-        case 'AltRight': Special.handleAlt(b);
+        case 'ShiftLeft': Special.handleShift(b, true, event);
+        case 'ShiftRight': Special.handleShift(b, false, event)
+        case 'AltLeft': Special.handleAlt(b, event);
+        case 'AltRight': Special.handleAlt(b, event);
         case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps(event);
     }
 }
-
-
-
