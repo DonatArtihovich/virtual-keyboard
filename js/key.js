@@ -31,6 +31,8 @@ function handleSpecialKey(key) {
         case 'Space': enterText(Data.spaceContents['Space']);
         case 'Tab': enterText(Data.spaceContents['Tab']);
         case 'CapsLock': Special.handleCaps();
+        case 'Backspace': Special.handleBackspace();
+        case 'Delete': Special.handleDelete();
     }
 }
 

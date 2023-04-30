@@ -29,6 +29,6 @@ export default function enterText(keyName, onShift, onCaps) {
 
 function checkKeyChild(keyName) {
     const key = document.querySelector(`[data-key = ${ keyName }]`);
-    console.log(key.children.length? true : false)
+    
     return key.children.length? true : false
 }
