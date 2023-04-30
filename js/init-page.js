@@ -18,6 +18,7 @@ function createPage() {
 
     const textArea = createElem('textarea', 'keyboard__text');
     textArea.name = 'text';
+    textArea.setAttribute('autofocus', 'autofocus');
 
     const keyboardElement = createKeyboard();
 

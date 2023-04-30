@@ -1,6 +1,6 @@
 import * as Date from './data.js';
 
-export default function initFunctioning() {
+export default function addBasicFunctioning() {
     const keyboard = document.querySelector('.keyboard__keys')
     window.addEventListener('keydown', makeKeyActive);
     window.addEventListener('keyup', makeKeyInactive);

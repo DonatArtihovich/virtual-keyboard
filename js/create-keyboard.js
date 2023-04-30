@@ -5,7 +5,7 @@ import * as Data from './data.js'
 export default function createKeyboard() {
     const keysContainer = createElem('div', 'keyboard__keys');
     const myStorage = window.localStorage;
-    if(!myStorage.getItem('language')) myStorage.setItem('language', 'en')
+    if(!myStorage.getItem('language')) myStorage.setItem('language', 'ru')
     const keyLanguage = myStorage.getItem('language');
 
     for (let i = 0; i < Data.keysArr.length; i++) {

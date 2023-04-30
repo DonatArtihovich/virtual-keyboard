@@ -83,3 +83,8 @@ export const keysArr = ['Backquote', 'Digit1', 'Digit2',
   'ControlRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
 
 export const doubleKeysArr = ['Backspace', 'CapsLock', 'Enter', 'ShiftLeft'];
+
+export const spaceContents = {
+  Space: { en: [' ', ' '], ru: ['\u00A0', ' '] },
+  Tab: { en: ['\ \ \ ', '\ '], ru: ['\ \ \ ', '\ '] }
+}

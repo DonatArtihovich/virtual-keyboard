@@ -1,5 +1,5 @@
-import initPage from './init.js';
-import initFunctioning from './click.js'
+import initPage from './init-page.js';
+import initFunctioning from './init-functioning.js'
 
 initPage()
 initFunctioning()
