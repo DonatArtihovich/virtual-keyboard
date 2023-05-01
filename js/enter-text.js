@@ -28,7 +28,7 @@ export default function enterText(keyName, onShift, onCaps, onMobileShift) {
     textArea.textContent = textArea.value;
     textArea.setSelectionRange(enterStart, enterStart);
 
-    Mobile.handleMobileLeftShift(false)
+    Mobile.handleMobileLeftShift(false, undefined, undefined, true)
     console.log(onMobileShift)
 }
 

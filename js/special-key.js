@@ -140,8 +140,8 @@ function handleRightArrow(e) {
 function handleUpArrow(e) {
   if(e.target.dataset.key !== 'ArrowUp') return;
   const textArea = document.querySelector('.keyboard__text');
-  let selectionStart = textArea.selectionStart - textArea.cols + 1;
-
+  let selectionStart = textArea.selectionStart - textArea.cols;
+  
   if(onControl) selectionStart = 0;
 
   textArea.setSelectionRange(selectionStart, selectionStart);
@@ -150,7 +150,7 @@ function handleUpArrow(e) {
 function handleDownArrow(e) {
   if(e.target.dataset.key !== 'ArrowDown') return;
   const textArea = document.querySelector('.keyboard__text');
-  let selectionStart = textArea.selectionStart + textArea.cols - 1;
+  let selectionStart = textArea.selectionStart + textArea.cols;
 
   if(onControl) selectionStart = textArea.value.split('').length;
 
