@@ -7,7 +7,7 @@ import enterText from './enter-text.js';
 export default function addKeyEvents() {
     const keyboard = document.querySelector('.keyboard__keys');
     
-    keyboard.addEventListener('mousedown', e => { handleVirtualKey(e) });
+    keyboard.addEventListener('click', e => { handleVirtualKey(e) });
     window.addEventListener('keydown', e => { handleKeyDown(e, true) });
     window.addEventListener('keyup', e => { handleKeyDown(e, false) });
 
