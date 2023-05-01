@@ -1,6 +1,8 @@
 import * as Data from './data.js';
 import * as Mobile from './mobile-key.js';
-export default function enterText(keyName, onShift, onCaps, onMobileShift) {
+
+export default function enterText(keyName, onShift, onCaps, onMobileShift, onControl, onMobileControl) {
+    if(onControl || onMobileControl) return;
     const keyData = (Data.keysDataContent.hasOwnProperty(keyName))? Data.keysDataContent[keyName] : Data.spaceContents[keyName]
     const textArea = document.querySelector('.keyboard__text');
     const language = window.localStorage.getItem('language');

@@ -1,17 +1,17 @@
 import changeKeyboardLanguage from './language.js';
 import redrawKeyboard from './recreate-page.js';
+import * as Mobile from './mobile-key.js';
 
 let onShift = false;
 let onAlt = false;
 let onCaps = false;
 let onControl = false;
-let onMobileShift = false;
 
 function handleLeftShift(b, e) {
   if (e.code === 'ShiftLeft' ) {
     onShift = b;
     
-    redrawKeyboard(onCaps, onShift);
+    if(!Mobile.onMobileControl &&  !onControl) redrawKeyboard(onCaps, onShift);
 
     if(b && onAlt && e.code === 'ShiftLeft') {
         changeKeyboardLanguage(onCaps);
@@ -23,7 +23,7 @@ function handleRightShift(b, e) {
   if (e.code === 'ShiftRight' ) {
     onShift = b;
     
-    redrawKeyboard(onShift, onShift);
+    if(!Mobile.onMobileControl && !onControl) redrawKeyboard(onShift, onShift);
   }
 }
 
@@ -77,4 +77,4 @@ function handleRightControl(b) {
 }
 
 
-export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleLeftControl, handleRightControl, onMobileShift, onShift, onCaps, onAlt }
+export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleLeftControl, handleRightControl, onShift, onCaps, onAlt, onControl }
