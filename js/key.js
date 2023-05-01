@@ -57,7 +57,7 @@ function handleKeyDown(event, b) {
         case 'AltLeft': Special.handleLeftAlt(b);
         case 'AltRight': Special.handleRightAlt(b);
         case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps(event);
-        case 'ControlLeft': Special.handleLeftControl(b);
-        case 'ControlRight': Special.handleRightControl(b);
+        case 'ControlLeft': Special.handleLeftControl(b, event);
+        case 'ControlRight': Special.handleRightControl(b, event);
     }
 }

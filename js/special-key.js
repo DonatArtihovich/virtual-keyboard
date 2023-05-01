@@ -10,12 +10,10 @@ let onControl = false;
 function handleLeftShift(b, e) {
   if (e.code === 'ShiftLeft' ) {
     onShift = b;
-    
-    if(!Mobile.onMobileControl &&  !onControl) redrawKeyboard(onCaps, onShift);
 
-    if(b && onAlt && e.code === 'ShiftLeft') {
-        changeKeyboardLanguage(onCaps);
-    }
+    if (!Mobile.onMobileControl && !onControl) redrawKeyboard(onCaps, onShift);
+
+    if (b && onAlt && e.code === 'ShiftLeft') changeKeyboardLanguage(onCaps);
   }
 }
 
@@ -23,7 +21,7 @@ function handleRightShift(b, e) {
   if (e.code === 'ShiftRight' ) {
     onShift = b;
     
-    if(!Mobile.onMobileControl && !onControl) redrawKeyboard(onShift, onShift);
+    if(!Mobile.onMobileControl && !onControl) redrawKeyboard(onCaps, onShift);
   }
 }
 
@@ -68,12 +66,16 @@ function handleDelete(e) {
     textArea.setSelectionRange(selectionStart, selectionStart)
 }
 
-function handleLeftControl(b) {
-  onControl = b;
+function handleLeftControl(b, e) {
+  if(e.code === 'ControlLeft') {
+    onControl = b;
+  }  
 }
 
-function handleRightControl(b) {
-  onControl = b;
+function handleRightControl(b, e) {
+  if(e.code === 'ControlLeft') {
+    onControl = b;
+  } 
 }
 
 
