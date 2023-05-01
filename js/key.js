@@ -29,20 +29,22 @@ function handleVirtualKey(event) {
 
 function handleSpecialKey(key, e) {
     switch(key) {
-        case 'Space': Special.handleSpace(e);
-        case 'Tab': Special.handleTab(e);
-        case 'Enter': Special.handleEnter(e);
+        case 'Space': Mobile.handleMobileSpace(e);
+        case 'Tab': Mobile.handleMobileTab(e);
+        case 'Enter': Mobile.handleMobileEnter(e);
         case 'CapsLock': Special.handleCaps(e);
         case 'Backspace': Special.handleBackspace(e);
         case 'Delete': Special.handleDelete(e);
-        case 'ArrowLeft': Special.handleLeftArrow(e);
-        case 'ArrowRight': Special.handleRightArrow(e);
-        case 'ArrowUp': Special.handleUpArrow(e);
-        case 'ArrowDown': Special.handleDownArrow(e);
+        case 'ArrowLeft': Mobile.handleMobileLeftArrow(e);
+        case 'ArrowRight': Mobile.handleMobileRightArrow(e);
+        case 'ArrowUp': Mobile.handleMobileUpArrow(e);
+        case 'ArrowDown': Mobile.handleMobileDownArrow(e);
         case 'ShiftLeft': Mobile.handleMobileLeftShift(true, e);
         case 'ShiftRight': Mobile.handleMobileRightShift(true, e);
         case 'AltLeft': Mobile.handleMobileLeftAlt(e);
         case 'AltRight': Mobile.handleMobileRightAlt(e);
+        case 'ControlRight': Mobile.handleMobileRightControl(e);
+        case 'ControlRight': Mobile.handleMobileLeftControl(e);
     }
 }
 
