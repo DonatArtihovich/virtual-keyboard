@@ -18,10 +18,12 @@ function handleVirtualKey(event) {
     let onShift = Special.onShift;
     let onMobileShift = Mobile.onMobileShift;
     let onCaps = Special.onCaps;
+    let onControl = Special.onControl;
+    let onMobileControl = Mobile.onMobileControl;
     const keyName = event.target.dataset.key;
     
     if(Data.keysDataContent[keyName]) {
-        enterText(keyName, onShift, onCaps, onMobileShift)
+        enterText(keyName, onShift, onCaps, onMobileShift, onControl, onMobileControl)
     } else {
         handleSpecialKey(keyName, event)
     }
@@ -40,7 +42,7 @@ function handleSpecialKey(key, e) {
         case 'ArrowUp': Mobile.handleMobileUpArrow(e);
         case 'ArrowDown': Mobile.handleMobileDownArrow(e);
         case 'ShiftLeft': Mobile.handleMobileLeftShift(true, e);
-        case 'ShiftRight': Mobile.handleMobileRightShift(true, e);
+        case 'ShiftRight': Mobile.handleMobileRightShift(e);
         case 'AltLeft': Mobile.handleMobileLeftAlt(e);
         case 'AltRight': Mobile.handleMobileRightAlt(e);
         case 'ControlRight': Mobile.handleMobileRightControl(e);
