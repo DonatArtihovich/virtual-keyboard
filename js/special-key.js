@@ -11,7 +11,7 @@ function handleLeftShift(b, e) {
   if (e.code === 'ShiftLeft' ) {
     onShift = b;
     
-    redrawKeyboard(onShift, onShift);
+    redrawKeyboard(onCaps, onShift);
 
     if(b && onAlt && e.code === 'ShiftLeft') {
         changeKeyboardLanguage(onCaps);
