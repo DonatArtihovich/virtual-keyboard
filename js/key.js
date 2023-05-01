@@ -41,6 +41,8 @@ function handleSpecialKey(key, e) {
         case 'ArrowDown': Special.handleDownArrow(e);
         case 'ShiftLeft': Mobile.handleMobileLeftShift(true, e);
         case 'ShiftRight': Mobile.handleMobileRightShift(true, e);
+        case 'AltLeft': Mobile.handleMobileLeftAlt(e);
+        case 'AltRight': Mobile.handleMobileRightAlt(e);
     }
 }
 
