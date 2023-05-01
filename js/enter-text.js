@@ -29,7 +29,6 @@ export default function enterText(keyName, onShift, onCaps, onMobileShift) {
     textArea.setSelectionRange(enterStart, enterStart);
 
     Mobile.handleMobileLeftShift(false, undefined, undefined, true)
-    console.log(onMobileShift)
 }
 
 function checkKeyChild(keyName) {

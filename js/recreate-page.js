@@ -5,7 +5,7 @@ export default function redrawKeyboard(caps, shift, mobileShift) {
     const keys = document.querySelectorAll('.keyboard__key');
     const language = window.localStorage.getItem('language');
     let key, index;
-    console.log('caps: ', caps, 'shift: ', shift, 'mobile shift: ', mobileShift)
+    
     for(let i = 0; i < keys.length; i++) {
         key = keys[i];
         index = (caps && !((i > 0 && i < 14) || (language === 'en' && i < 14)) && (!Data.unCapsKeyIndex.includes(key.dataset.key) || (language === 'ru' && key.dataset.key !== 'Backslash' && key.dataset.key !== 'Slash'))) ? 1 : 0

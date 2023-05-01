@@ -44,7 +44,7 @@ function handleSpecialKey(key, e) {
         case 'AltLeft': Mobile.handleMobileLeftAlt(e);
         case 'AltRight': Mobile.handleMobileRightAlt(e);
         case 'ControlRight': Mobile.handleMobileRightControl(e);
-        case 'ControlRight': Mobile.handleMobileLeftControl(e);
+        case 'ControlLeft': Mobile.handleMobileLeftControl(e);
     }
 }
 
