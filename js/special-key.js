@@ -6,6 +6,7 @@ let onShift = false;
 let onAlt = false;
 let onCaps = false;
 let onControl = false;
+let onMobileShift = false;
 
 function handleLeftShift(b, e) {
   if (e.code === 'ShiftLeft' ) {
@@ -27,12 +28,13 @@ function handleRightShift(b, e) {
   }
 }
 
+
 function handleCaps(e) {
-    if (e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock') {
+    if (!(e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock')) return
+
     onCaps = !onCaps;
-    redrawKeyboard(onCaps)
-  } else return
-   
+
+    redrawKeyboard(onCaps, onShift)   
 }
 
 function handleLeftAlt(b) {
@@ -156,4 +158,4 @@ function handleDownArrow(e) {
 }
 
 
-export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, handleLeftArrow, handleRightArrow, handleUpArrow, handleDownArrow, handleLeftControl, handleRightControl, onShift, onCaps, onAlt }
+export { handleLeftShift, handleRightShift, handleCaps, handleLeftAlt, handleRightAlt, handleBackspace, handleDelete, handleEnter, handleTab, handleSpace, handleLeftArrow, handleRightArrow, handleUpArrow, handleDownArrow, handleLeftControl, handleRightControl, onMobileShift, onShift, onCaps, onAlt }

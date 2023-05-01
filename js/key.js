@@ -1,5 +1,6 @@
 import * as Data from './data.js';
-import * as Special from './special-key.js'
+import * as Special from './special-key.js';
+import * as Mobile from './mobile-key.js';
 import enterText from './enter-text.js';
 
 
@@ -15,12 +16,12 @@ export default function addKeyEvents() {
 function handleVirtualKey(event) {
     if(!event.target.classList.contains('keyboard__key')) return
     let onShift = Special.onShift;
-    let onAlt = Special.onAlt;
+    let onMobileShift = Mobile.onMobileShift;
     let onCaps = Special.onCaps;
     const keyName = event.target.dataset.key;
     
     if(Data.keysDataContent[keyName]) {
-        enterText(keyName, onShift, onCaps)
+        enterText(keyName, onShift, onCaps, onMobileShift)
     } else {
         handleSpecialKey(keyName, event)
     }
@@ -38,6 +39,8 @@ function handleSpecialKey(key, e) {
         case 'ArrowRight': Special.handleRightArrow(e);
         case 'ArrowUp': Special.handleUpArrow(e);
         case 'ArrowDown': Special.handleDownArrow(e);
+        case 'ShiftLeft': Mobile.handleMobileLeftShift(true, e);
+        case 'ShiftRight': Mobile.handleMobileRightShift(true, e);
     }
 }
 

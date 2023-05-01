@@ -1,13 +1,13 @@
 import * as Data from './data.js';
-
-export default function enterText(keyName, onShift, onCaps) {
+import * as Mobile from './mobile-key.js';
+export default function enterText(keyName, onShift, onCaps, onMobileShift) {
     const keyData = (Data.keysDataContent.hasOwnProperty(keyName))? Data.keysDataContent[keyName] : Data.spaceContents[keyName]
     const textArea = document.querySelector('.keyboard__text');
     const language = window.localStorage.getItem('language');
     let enterStart = textArea.selectionStart;
     let enterIndex = (onCaps && !checkKeyChild(keyName))? 1 : 0;
-    if (onShift) enterIndex = +(!enterIndex);
-
+    if (onShift || onMobileShift) enterIndex = +(!enterIndex);
+    
     let enterContent = keyData[language][enterIndex];
     let newValue;
 
@@ -27,6 +27,9 @@ export default function enterText(keyName, onShift, onCaps) {
     
     textArea.textContent = textArea.value;
     textArea.setSelectionRange(enterStart, enterStart);
+
+    Mobile.handleMobileLeftShift(false)
+    console.log(onMobileShift)
 }
 
 function checkKeyChild(keyName) {
