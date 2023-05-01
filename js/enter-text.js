@@ -1,14 +1,16 @@
 import * as Data from './data.js';
-
-export default function enterText(keyName, onShift, onCaps) {
+import * as Mobile from './mobile-key.js';
+export default function enterText(keyName, onShift, onCaps, onMobileShift) {
     const keyData = (Data.keysDataContent.hasOwnProperty(keyName))? Data.keysDataContent[keyName] : Data.spaceContents[keyName]
     const textArea = document.querySelector('.keyboard__text');
     const language = window.localStorage.getItem('language');
     let enterStart = textArea.selectionStart;
-    let enterIndex = (onShift || (onCaps && !checkKeyChild(keyName))) ? 1 : 0;
+    let enterIndex = (onCaps && !checkKeyChild(keyName))? 1 : 0;
+    if (onShift || onMobileShift) enterIndex = +(!enterIndex);
+    
     let enterContent = keyData[language][enterIndex];
     let newValue;
-    if (checkKeyChild(keyName)) enterIndex = 0;
+
     if (textArea.value === '') {
         textArea.value += enterContent
         enterStart++;
@@ -25,10 +27,16 @@ export default function enterText(keyName, onShift, onCaps) {
     
     textArea.textContent = textArea.value;
     textArea.setSelectionRange(enterStart, enterStart);
+
+    Mobile.handleMobileLeftShift(false, undefined, undefined, true)
 }
 
 function checkKeyChild(keyName) {
+    const language = window.localStorage.getItem('language');
     const key = document.querySelector(`[data-key = ${ keyName }]`);
-    
-    return key.children.length? true : false
+    const keysList = document.querySelectorAll('.keyboard__key');
+    for(let i = 0; i < keysList.length; i++) { 
+        if (keysList[i].dataset.key === keyName && ((i > 0 && i < 14) || (language === 'en' && i < 14))) return true
+    }
+    return (key.children.length > 0)? true : false
 }
