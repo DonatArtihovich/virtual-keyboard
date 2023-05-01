@@ -73,7 +73,7 @@ function handleLeftControl(b, e) {
 }
 
 function handleRightControl(b, e) {
-  if(e.code === 'ControlLeft') {
+  if(e.code === 'ControlRight') {
     onControl = b;
   } 
 }
