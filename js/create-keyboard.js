@@ -22,7 +22,7 @@ function createKey(index, lang) {
     const key = createElem('button', keyClasslist, keyContent);
     key.dataset.key = Data.keysArr[index];
     
-    if(index < 13 && index > 0) {
+    if((index < 13 && index > 0) || (lang === 'en' && index < 13)) {
         const keySpan = createElem('span', 'up-content', Data.keysDataContent[Data.keysArr[index]][lang][1]);
         key.prepend(keySpan)
     }
