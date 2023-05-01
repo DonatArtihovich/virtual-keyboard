@@ -15,7 +15,6 @@ body {
 .keyboard-wrapper {
     margin: 0;
     padding: 0;
-    /* background-color: #414052;*/
 }
 
 .keyboard {
@@ -42,7 +41,7 @@ body {
 }
 
 .keyboard__text {
-    width: 60vw;
+    width: 925px;
     height: 158px;
     align-self: center;
     font-size: 30px;
@@ -56,7 +55,7 @@ body {
 }
 
 .keyboard__keys {
-    width: 66vw;
+    width: 1015px;
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
@@ -64,8 +63,8 @@ body {
 }
 
 .keyboard__key {
-    width: 4vw;
-    height: 4vw;
+    width: 62px;
+    height: 60px;
     padding: 0;
     position: relative;
     border-radius: 10px;
