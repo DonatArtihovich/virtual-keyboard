@@ -5,5 +5,5 @@ export function saveTextFocus() {
 
 export function preventMobileKeyboard() {
   const textArea = document.querySelector('.keyboard__text');
-  textArea.addEventListener('focus', e => { e.preventDefault() });
+  textArea.addEventListener('focus', (e) => { e.preventDefault(); });
 }
