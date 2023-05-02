@@ -1,32 +1,26 @@
 import * as Data from './data.js';
-import * as Mobile from './mobile-key.js';
+import redrawKeyboard from './recreate-page.js';
 
-function checkKeyChild(keyName) {
+function checkSymbolKey(keyName) {
   const language = window.localStorage.getItem('language');
-  const key = document.querySelector(`[data-key = ${keyName}]`);
-  const keysList = document.querySelectorAll('.keyboard__key');
-  for (let i = 0; i < keysList.length; i += 1) {
-    if (keysList[i].dataset.key === keyName && ((i > 0 && i < 14) || (language === 'en' && i < 14))) return true;
-  }
-  return (key.children.length > 0);
+
+  return Data.noCapsKeys[language].includes(keyName);
 }
 
-export default function enterText(
-  keyName,
-  onShift,
-  onCaps,
-  onMobileShift,
-  onControl,
-  onMobileControl,
-) {
-  if (onControl || onMobileControl) return;
-  const keyData = (Data.keysDataContent.hasOwnProperty(keyName))
+function upShift() {
+  Data.changeKeyState('onMobileShift', false);
+  redrawKeyboard();
+}
+
+export default function enterText(keyName) {
+  if (Data.keyStates.onControl || Data.keyStates.onMobileControl) return;
+  const keyData = (Data.keysDataContent[keyName])
     ? Data.keysDataContent[keyName] : Data.spaceContents[keyName];
   const textArea = document.querySelector('.keyboard__text');
   const language = window.localStorage.getItem('language');
   let enterStart = textArea.selectionStart;
-  let enterIndex = (onCaps && !checkKeyChild(keyName)) ? 1 : 0;
-  if (onShift || onMobileShift) enterIndex = +(!enterIndex);
+  let enterIndex = (Data.keyStates.onCaps && !checkSymbolKey(keyName)) ? 1 : 0;
+  if (Data.keyStates.onShift || Data.keyStates.onMobileShift) enterIndex = +(!enterIndex);
   const enterContent = keyData[language][enterIndex];
   let newValue;
 
@@ -46,6 +40,5 @@ export default function enterText(
 
   textArea.textContent = textArea.value;
   textArea.setSelectionRange(enterStart, enterStart);
-
-  Mobile.handleMobileLeftShift(false, undefined, undefined, true);
+  upShift();
 }

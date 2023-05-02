@@ -6,13 +6,13 @@ import enterText from './enter-text.js';
 function handleSpecialKey(key, e) {
   switch (key) {
     case 'Space':
-      Mobile.handleMobileSpace(e);
+      enterText('Space');
       break;
     case 'Tab':
-      Mobile.handleMobileTab(e);
+      enterText('Space');
       break;
     case 'Enter':
-      Mobile.handleMobileEnter(e);
+      enterText('Enter');
       break;
     case 'CapsLock':
       Special.handleCaps(e);
@@ -24,34 +24,28 @@ function handleSpecialKey(key, e) {
       Special.handleDelete(e);
       break;
     case 'ArrowLeft':
-      Mobile.handleMobileLeftArrow(e);
+      Mobile.handleMobileLeftArrow();
       break;
     case 'ArrowRight':
-      Mobile.handleMobileRightArrow(e);
+      Mobile.handleMobileRightArrow();
       break;
     case 'ArrowUp':
-      Mobile.handleMobileUpArrow(e);
+      Mobile.handleMobileUpArrow();
       break;
     case 'ArrowDown':
-      Mobile.handleMobileDownArrow(e);
+      Mobile.handleMobileDownArrow();
       break;
     case 'ShiftLeft':
-      Mobile.handleMobileLeftShift(true, e);
-      break;
     case 'ShiftRight':
-      Mobile.handleMobileRightShift(e);
+      Mobile.handleMobileShift(e);
       break;
     case 'AltLeft':
-      Mobile.handleMobileLeftAlt(e);
-      break;
     case 'AltRight':
-      Mobile.handleMobileRightAlt(e);
+      Data.changeKeyState('onMobileAlt', !Data.keyStates.onAlt);
       break;
     case 'ControlRight':
-      Mobile.handleMobileRightControl(e);
-      break;
     case 'ControlLeft':
-      Mobile.handleMobileLeftControl(e);
+      Mobile.handleMobileControl();
       break;
     default:
   }
@@ -86,15 +80,10 @@ function handleKeyDown(event, b) {
 
 function handleVirtualKey(event) {
   if (!event.target.classList.contains('keyboard__key')) return;
-  const { onShift } = Special;
-  const { onMobileShift } = Mobile;
-  const { onCaps } = Special;
-  const { onControl } = Special;
-  const { onMobileControl } = Mobile;
   const keyName = event.target.dataset.key;
 
   if (Data.keysDataContent[keyName]) {
-    enterText(keyName, onShift, onCaps, onMobileShift, onControl, onMobileControl);
+    enterText(keyName);
   } else {
     handleSpecialKey(keyName, event);
   }
