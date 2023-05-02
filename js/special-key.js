@@ -8,7 +8,10 @@ function handleLeftShift(b, e) {
 
     if (!keyStates.onMobileControl && !keyStates.onControl) redrawKeyboard();
 
-    if (b && keyStates.onAlt && e.code === 'ShiftLeft') changeKeyboardLanguage();
+    if (b && (keyStates.onAlt || keyStates.onMobileAlt) && e.code === 'ShiftLeft') {
+      changeKeyState('onMobileAlt', false);
+      changeKeyboardLanguage();
+    }
   }
 }
 
