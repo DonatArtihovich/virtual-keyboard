@@ -3,7 +3,7 @@ import redrawKeyboard from './recreate-page.js';
 import changeKeyboardLanguage from './language.js';
 
 function handleMobileShift(e) {
-  if (keyStates.onMobileAlt && e?.target.dataset.key === 'ShiftLeft') {
+  if ((keyStates.onMobileAlt || keyStates.onAlt) && e?.target.dataset.key === 'ShiftLeft') {
     changeKeyboardLanguage();
     changeKeyState('onMobileAlt', false);
   } else {
