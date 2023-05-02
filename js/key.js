@@ -3,61 +3,107 @@ import * as Special from './special-key.js';
 import * as Mobile from './mobile-key.js';
 import enterText from './enter-text.js';
 
-
-export default function addKeyEvents() {
-    const keyboard = document.querySelector('.keyboard__keys');
-    
-    keyboard.addEventListener('click', e => { handleVirtualKey(e) });
-    window.addEventListener('keydown', e => { handleKeyDown(e, true) });
-    window.addEventListener('keyup', e => { handleKeyDown(e, false) });
-
-}
-
-function handleVirtualKey(event) {
-    if(!event.target.classList.contains('keyboard__key')) return
-    let onShift = Special.onShift;
-    let onMobileShift = Mobile.onMobileShift;
-    let onCaps = Special.onCaps;
-    let onControl = Special.onControl;
-    let onMobileControl = Mobile.onMobileControl;
-    const keyName = event.target.dataset.key;
-    
-    if(Data.keysDataContent[keyName]) {
-        enterText(keyName, onShift, onCaps, onMobileShift, onControl, onMobileControl)
-    } else {
-        handleSpecialKey(keyName, event)
-    }
-}
-
 function handleSpecialKey(key, e) {
-    switch(key) {
-        case 'Space': Mobile.handleMobileSpace(e);
-        case 'Tab': Mobile.handleMobileTab(e);
-        case 'Enter': Mobile.handleMobileEnter(e);
-        case 'CapsLock': Special.handleCaps(e);
-        case 'Backspace': Special.handleBackspace(e);
-        case 'Delete': Special.handleDelete(e);
-        case 'ArrowLeft': Mobile.handleMobileLeftArrow(e);
-        case 'ArrowRight': Mobile.handleMobileRightArrow(e);
-        case 'ArrowUp': Mobile.handleMobileUpArrow(e);
-        case 'ArrowDown': Mobile.handleMobileDownArrow(e);
-        case 'ShiftLeft': Mobile.handleMobileLeftShift(true, e);
-        case 'ShiftRight': Mobile.handleMobileRightShift(e);
-        case 'AltLeft': Mobile.handleMobileLeftAlt(e);
-        case 'AltRight': Mobile.handleMobileRightAlt(e);
-        case 'ControlRight': Mobile.handleMobileRightControl(e);
-        case 'ControlLeft': Mobile.handleMobileLeftControl(e);
-    }
+  switch (key) {
+    case 'Space':
+      Mobile.handleMobileSpace(e);
+      break;
+    case 'Tab':
+      Mobile.handleMobileTab(e);
+      break;
+    case 'Enter':
+      Mobile.handleMobileEnter(e);
+      break;
+    case 'CapsLock':
+      Special.handleCaps(e);
+      break;
+    case 'Backspace':
+      Special.handleBackspace(e);
+      break;
+    case 'Delete':
+      Special.handleDelete(e);
+      break;
+    case 'ArrowLeft':
+      Mobile.handleMobileLeftArrow(e);
+      break;
+    case 'ArrowRight':
+      Mobile.handleMobileRightArrow(e);
+      break;
+    case 'ArrowUp':
+      Mobile.handleMobileUpArrow(e);
+      break;
+    case 'ArrowDown':
+      Mobile.handleMobileDownArrow(e);
+      break;
+    case 'ShiftLeft':
+      Mobile.handleMobileLeftShift(true, e);
+      break;
+    case 'ShiftRight':
+      Mobile.handleMobileRightShift(e);
+      break;
+    case 'AltLeft':
+      Mobile.handleMobileLeftAlt(e);
+      break;
+    case 'AltRight':
+      Mobile.handleMobileRightAlt(e);
+      break;
+    case 'ControlRight':
+      Mobile.handleMobileRightControl(e);
+      break;
+    case 'ControlLeft':
+      Mobile.handleMobileLeftControl(e);
+      break;
+    default:
+  }
 }
 
 function handleKeyDown(event, b) {
-    switch(event.code) {
-        case 'ShiftLeft': Special.handleLeftShift(b, event);
-        case 'ShiftRight': Special.handleRightShift(b, event)
-        case 'AltLeft': Special.handleLeftAlt(b);
-        case 'AltRight': Special.handleRightAlt(b);
-        case 'CapsLock': if(event.type !== 'keyup') Special.handleCaps(event);
-        case 'ControlLeft': Special.handleLeftControl(b, event);
-        case 'ControlRight': Special.handleRightControl(b, event);
-    }
+  switch (event.code) {
+    case 'ShiftLeft':
+      Special.handleLeftShift(b, event);
+      break;
+    case 'ShiftRight':
+      Special.handleRightShift(b, event);
+      break;
+    case 'AltLeft':
+      Special.handleLeftAlt(b);
+      break;
+    case 'AltRight':
+      Special.handleRightAlt(b);
+      break;
+    case 'CapsLock':
+      if (event.type !== 'keyup') Special.handleCaps(event);
+      break;
+    case 'ControlLeft':
+      Special.handleLeftControl(b, event);
+      break;
+    case 'ControlRight':
+      Special.handleRightControl(b, event);
+      break;
+    default:
+  }
+}
+
+function handleVirtualKey(event) {
+  if (!event.target.classList.contains('keyboard__key')) return;
+  const { onShift } = Special;
+  const { onMobileShift } = Mobile;
+  const { onCaps } = Special;
+  const { onControl } = Special;
+  const { onMobileControl } = Mobile;
+  const keyName = event.target.dataset.key;
+
+  if (Data.keysDataContent[keyName]) {
+    enterText(keyName, onShift, onCaps, onMobileShift, onControl, onMobileControl);
+  } else {
+    handleSpecialKey(keyName, event);
+  }
+}
+
+export default function addKeyEvents() {
+  const keyboard = document.querySelector('.keyboard__keys');
+
+  keyboard.addEventListener('click', (e) => { handleVirtualKey(e); });
+  window.addEventListener('keydown', (e) => { handleKeyDown(e, true); });
+  window.addEventListener('keyup', (e) => { handleKeyDown(e, false); });
 }

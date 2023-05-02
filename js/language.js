@@ -1,12 +1,12 @@
-import redrawKeyboard from './recreate-page.js'
+import redrawKeyboard from './recreate-page.js';
 
 export default function changeKeyboardLanguage(caps) {
-    const myStorage = window.localStorage;
-    const curLang = myStorage.getItem('language')
-    const changedLang = (curLang === 'en') ? 'ru' : 'en';
-    
-    myStorage.removeItem('language');
-    myStorage.setItem('language', changedLang);
+  const myStorage = window.localStorage;
+  const curLang = myStorage.getItem('language');
+  const changedLang = (curLang === 'en') ? 'ru' : 'en';
 
-    redrawKeyboard(caps)
+  myStorage.removeItem('language');
+  myStorage.setItem('language', changedLang);
+
+  redrawKeyboard(caps);
 }

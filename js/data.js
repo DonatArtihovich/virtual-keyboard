@@ -88,6 +88,6 @@ export const spaceContents = {
   Space: { en: ['\u00A0', '\u00A0'], ru: ['\u00A0', '\u00A0'] },
   Tab: { en: ['\t', '\t'], ru: ['\t', '\t'] },
   Enter: { en: ['\n', '\n'], ru: ['\n', '\n'] },
-}
+};
 
-export const unCapsKeyIndex = ['Backslash', 'BracketLeft', 'BracketRight', 'Semicolon', 'Quote', 'Comma', 'Period', 'Slash']
+export const unCapsKeyIndex = ['Backslash', 'BracketLeft', 'BracketRight', 'Semicolon', 'Quote', 'Comma', 'Period', 'Slash'];
