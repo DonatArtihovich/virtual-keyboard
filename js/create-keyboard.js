@@ -4,7 +4,7 @@ import * as Data from './data.js';
 function getKeyClasslist(index) {
   const key = Data.keysArr[index];
   let classesArr = ['keyboard__key'];
-  if (!Data.keysDataContent.hasOwnProperty(key)) {
+  if (!Data.keysDataContent[key]) {
     classesArr.push('special-key');
     if (Data.doubleKeysArr.includes(key)) {
       classesArr.push('double-key');
@@ -18,7 +18,7 @@ function getKeyClasslist(index) {
 
 function getKeyContent(index, lang) {
   const key = Data.keysArr[index];
-  const keyContent = (Data.keysDataContent.hasOwnProperty(key))
+  const keyContent = (Data.keysDataContent[key])
     ? Data.keysDataContent[key][lang][0] : Data.keysSpecialDataContent[key];
   return keyContent;
 }

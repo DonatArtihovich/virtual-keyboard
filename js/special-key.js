@@ -1,44 +1,39 @@
+import { keyStates, changeKeyState } from './data.js';
 import changeKeyboardLanguage from './language.js';
 import redrawKeyboard from './recreate-page.js';
-import * as Mobile from './mobile-key.js';
-
-let onShift = false;
-let onAlt = false;
-let onCaps = false;
-let onControl = false;
 
 function handleLeftShift(b, e) {
   if (e.code === 'ShiftLeft') {
-    onShift = b;
+    changeKeyState('onShift', b);
 
-    if (!Mobile.onMobileControl && !onControl) redrawKeyboard(onCaps, onShift);
+    if (!keyStates.onMobileControl && !keyStates.onControl) redrawKeyboard();
 
-    if (b && onAlt && e.code === 'ShiftLeft') changeKeyboardLanguage(onCaps);
+    if (b && keyStates.onAlt && e.code === 'ShiftLeft') changeKeyboardLanguage();
   }
 }
 
 function handleRightShift(b, e) {
   if (e.code === 'ShiftRight') {
-    onShift = b;
+    changeKeyState('onShift', b);
 
-    if (!Mobile.onMobileControl && !onControl) redrawKeyboard(onCaps, onShift);
+    if (!keyStates.onMobileControl && !keyStates.onControl) redrawKeyboard();
   }
 }
 
 function handleCaps(e) {
   if (!(e.target.dataset.key === 'CapsLock' || e.code === 'CapsLock')) return;
 
-  onCaps = !onCaps;
+  changeKeyState('onCaps', !keyStates.onCaps);
 
-  redrawKeyboard(onCaps, onShift);
+  redrawKeyboard();
 }
 
 function handleLeftAlt(b) {
-  onAlt = b;
+  changeKeyState('onAlt', b);
 }
 
 function handleRightAlt(b) {
-  onAlt = b;
+  changeKeyState('onAlt', b);
 }
 
 function handleBackspace(e) {
@@ -68,13 +63,13 @@ function handleDelete(e) {
 
 function handleLeftControl(b, e) {
   if (e.code === 'ControlLeft') {
-    onControl = b;
+    changeKeyState('onControl', b);
   }
 }
 
 function handleRightControl(b, e) {
   if (e.code === 'ControlRight') {
-    onControl = b;
+    changeKeyState('onControl', b);
   }
 }
 
@@ -88,8 +83,4 @@ export {
   handleDelete,
   handleLeftControl,
   handleRightControl,
-  onShift,
-  onCaps,
-  onAlt,
-  onControl,
 };
