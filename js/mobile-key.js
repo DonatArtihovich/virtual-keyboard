@@ -1,6 +1,6 @@
-import * as Special from './special-key.js'
-import redrawKeyboard from './recreate-page.js'
-import changeKeyboardLanguage from './language.js'
+import * as Special from './special-key.js';
+import redrawKeyboard from './recreate-page.js';
+import changeKeyboardLanguage from './language.js';
 import enterText from './enter-text.js';
 
 let onMobileShift = false;
@@ -8,135 +8,141 @@ let onMobileAlt = false;
 let onMobileControl = false;
 
 function handleMobileLeftShift(b, e, stop, password) {
-  if(e?.target.dataset.key === 'ShiftLeft' || password) {
-
-    if(onMobileAlt) {
+  if (e?.target.dataset.key === 'ShiftLeft' || password) {
+    if (onMobileAlt) {
       changeKeyboardLanguage(Special.onCaps);
       onMobileAlt = false;
     } else {
-      onMobileShift = (e?.target.dataset.key === 'ShiftLeft')? !onMobileShift : b;
+      onMobileShift = (e?.target.dataset.key === 'ShiftLeft') ? !onMobileShift : b;
 
-      if(stop || onMobileControl || Special.onControl) return
+      if (stop || onMobileControl || Special.onControl) return;
       redrawKeyboard(Special.onCaps, Special.onShift, onMobileShift);
     }
   }
 }
 
 function handleMobileRightShift(e) {
-  if(e?.target.dataset.key === 'ShiftRight') {
+  if (e?.target.dataset.key === 'ShiftRight') {
     onMobileShift = !onMobileShift;
-    
-    if(onMobileControl || Special.onControl) return
+
+    if (onMobileControl || Special.onControl) return;
     redrawKeyboard(Special.onCaps, Special.onShift, onMobileShift);
   }
 }
 
 function handleMobileLeftArrow(e) {
-    if(e.target.dataset.key !== 'ArrowLeft') return;
-    const textArea = document.querySelector('.keyboard__text');
-    if(!textArea.value.length) return
-    let selectionStart = textArea.selectionStart;
-    if(!selectionStart) return;
-    
-    if(onMobileControl && onMobileShift || Special.onControl && onMobileShift || Special.onShift && onMobileControl) {
-      textArea.setSelectionRange(selectionStart, selectionStart);
-      textArea.setSelectionRange(0, selectionStart);
-      onMobileControl = false;
-      handleMobileLeftShift(false, undefined, undefined, true);
-      return
-    }
-
-    if(onMobileControl) {
-      textArea.setSelectionRange(0, 0);
-      onMobileControl = false;
-      return
-    }
-    
-    if(Special.onControl && Special.onShift) {
-      textArea.setSelectionRange(selectionStart, selectionStart);
-      textArea.setSelectionRange(0, selectionStart);
-      return
-    }
-  
-    if(Special.onControl) {
-      textArea.setSelectionRange(0, 0);
-      return
-    }
-
-    selectionStart--;
-    textArea.setSelectionRange(selectionStart, selectionStart);
-}
-  
-function handleMobileRightArrow(e) {
-  if(e.target.dataset.key !== 'ArrowRight') return;
+  if (e.target.dataset.key !== 'ArrowLeft') return;
   const textArea = document.querySelector('.keyboard__text');
-  if(!textArea.value.length) return
-  let selectionStart = textArea.selectionStart;
-  const textLength = textArea.value.split('').length;
-  
-  if(onMobileControl && onMobileShift || Special.onControl && onMobileShift || Special.onShift && onMobileControl) {
-    textArea.setSelectionRange(selectionStart, selectionStart);
-    textArea.setSelectionRange(selectionStart, textLength);
+  if (!textArea.value.length) return;
+  let { selectionStart } = textArea;
+  if (!selectionStart) return;
+
+  if (onMobileControl && onMobileControl) {
+    if (onMobileShift || Special.onControl) {
+      if (onMobileShift || Special.onShift) {
+        textArea.setSelectionRange(selectionStart, selectionStart);
+        textArea.setSelectionRange(0, selectionStart);
+        onMobileControl = false;
+        handleMobileLeftShift(false, undefined, undefined, true);
+        return;
+      }
+    }
+  }
+
+  if (onMobileControl) {
+    textArea.setSelectionRange(0, 0);
     onMobileControl = false;
-    handleMobileLeftShift(false, undefined, undefined, true)
-    return
+    return;
   }
 
-  if(onMobileControl) {
+  if (Special.onControl && Special.onShift) {
+    textArea.setSelectionRange(selectionStart, selectionStart);
+    textArea.setSelectionRange(0, selectionStart);
+    return;
+  }
+
+  if (Special.onControl) {
+    textArea.setSelectionRange(0, 0);
+    return;
+  }
+
+  selectionStart -= 1;
+  textArea.setSelectionRange(selectionStart, selectionStart);
+}
+
+function handleMobileRightArrow(e) {
+  if (e.target.dataset.key !== 'ArrowRight') return;
+  const textArea = document.querySelector('.keyboard__text');
+  if (!textArea.value.length) return;
+  let { selectionStart } = textArea;
+  const textLength = textArea.value.split('').length;
+
+  if (onMobileControl && onMobileControl) {
+    if (onMobileShift || Special.onControl) {
+      if (onMobileShift || Special.onShift) {
+        textArea.setSelectionRange(selectionStart, selectionStart);
+        textArea.setSelectionRange(selectionStart, textLength);
+        onMobileControl = false;
+        handleMobileLeftShift(false, undefined, undefined, true);
+        return;
+      }
+    }
+  }
+
+  if (onMobileControl) {
     textArea.setSelectionRange(textLength, textLength);
-    onMobileControl = false;  
-    return
+    onMobileControl = false;
+    return;
   }
 
-  if(Special.onControl && Special.onShift) {
+  if (Special.onControl && Special.onShift) {
     textArea.setSelectionRange(selectionStart, selectionStart);
     textArea.setSelectionRange(selectionStart, textLength);
-    return
+    return;
   }
 
-  if(Special.onControl) {
+  if (Special.onControl) {
     textArea.setSelectionRange(textLength, textLength);
-    return
+    return;
   }
 
-  selectionStart++;
+  selectionStart += 1;
   textArea.setSelectionRange(selectionStart, selectionStart);
-
 }
-  
+
 function handleMobileUpArrow(e) {
-  if(e.target.dataset.key !== 'ArrowUp') return;
+  if (e.target.dataset.key !== 'ArrowUp') return;
   const textArea = document.querySelector('.keyboard__text');
   let selectionStart = textArea.selectionStart - textArea.cols;
-  
-  if(onMobileControl && onMobileShift) {
+
+  if (onMobileControl && onMobileShift) {
     textArea.setSelectionRange(0, textArea.selectionStart);
     onMobileControl = false;
-    handleMobileLeftShift(false, undefined, undefined, true)
-    return
+    handleMobileLeftShift(false, undefined, undefined, true);
+    return;
   }
 
-  if(Special.onControl || onMobileControl) {
+  if (Special.onControl || onMobileControl) {
     selectionStart = 0;
     onMobileControl = false;
   }
 
   textArea.setSelectionRange(selectionStart, selectionStart);
 }
-  
+
 function handleMobileDownArrow(e) {
-  if(e.target.dataset.key !== 'ArrowDown') return;
+  if (e.target.dataset.key !== 'ArrowDown') return;
   const textArea = document.querySelector('.keyboard__text');
   let selectionStart = textArea.selectionStart + textArea.cols;
 
-  if(onMobileControl && onMobileShift) {
+  if (onMobileControl && onMobileShift) {
     textArea.setSelectionRange(textArea.selectionStart, textArea.value.split('').length);
     onMobileControl = false;
     handleMobileLeftShift(false, undefined, undefined, true);
-    return
+    return;
   }
 
-  if(Special.onControl || onMobileControl) {
+  if (Special.onControl || onMobileControl) {
     selectionStart = textArea.value.split('').length;
     onMobileControl = false;
   }
@@ -145,45 +151,61 @@ function handleMobileDownArrow(e) {
 }
 
 function handleMobileLeftAlt(e) {
-  if(e?.target.dataset.key === 'AltLeft') {
-  onMobileAlt = true;
+  if (e?.target.dataset.key === 'AltLeft') {
+    onMobileAlt = true;
   }
 }
 
 function handleMobileRightAlt(e) {
-  if(e?.target.dataset.key === 'AltRight') {
-  onMobileAlt = true;
+  if (e?.target.dataset.key === 'AltRight') {
+    onMobileAlt = true;
   }
 }
 
 function handleMobileLeftControl(e) {
-  if(e?.target.dataset.key === 'ControlLeft') {
+  if (e?.target.dataset.key === 'ControlLeft') {
     onMobileControl = !onMobileControl;
     onMobileShift = false;
   }
 }
 
 function handleMobileRightControl(e) {
-  if(e?.target.dataset.key === 'ControlRight') {
+  if (e?.target.dataset.key === 'ControlRight') {
     onMobileControl = !onMobileControl;
     onMobileShift = false;
-
   }
 }
 
 function handleMobileEnter(e) {
-  if (e.target.dataset.key !== 'Enter') return
+  if (e.target.dataset.key !== 'Enter') return;
   enterText('Enter');
 }
 
 function handleMobileTab(e) {
-  if (e.target.dataset.key !== 'Tab') return
+  if (e.target.dataset.key !== 'Tab') return;
   enterText('Tab');
 }
 
 function handleMobileSpace(e) {
-  if (e.target.dataset.key !== 'Space') return
+  if (e.target.dataset.key !== 'Space') return;
   enterText('Space');
 }
 
-export { handleMobileLeftShift, handleMobileRightShift, handleMobileLeftAlt, handleMobileRightAlt, handleMobileLeftControl, handleMobileRightControl, handleMobileLeftArrow, handleMobileRightArrow, handleMobileUpArrow, handleMobileDownArrow, handleMobileEnter, handleMobileTab, handleMobileSpace, onMobileShift, onMobileAlt, onMobileControl }
+export {
+  handleMobileLeftShift,
+  handleMobileRightShift,
+  handleMobileLeftAlt,
+  handleMobileRightAlt,
+  handleMobileLeftControl,
+  handleMobileRightControl,
+  handleMobileLeftArrow,
+  handleMobileRightArrow,
+  handleMobileUpArrow,
+  handleMobileDownArrow,
+  handleMobileEnter,
+  handleMobileTab,
+  handleMobileSpace,
+  onMobileShift,
+  onMobileAlt,
+  onMobileControl,
+};
