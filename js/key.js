@@ -15,13 +15,13 @@ function handleSpecialKey(key, e) {
       enterText('Enter');
       break;
     case 'CapsLock':
-      Special.handleCaps(e);
+      Special.handleCaps();
       break;
     case 'Backspace':
-      Special.handleBackspace(e);
+      Special.handleBackspace();
       break;
     case 'Delete':
-      Special.handleDelete(e);
+      Special.handleDelete();
       break;
     case 'ArrowLeft':
       Mobile.handleMobileLeftArrow();
@@ -54,25 +54,19 @@ function handleSpecialKey(key, e) {
 function handleKeyDown(event, b) {
   switch (event.code) {
     case 'ShiftLeft':
-      Special.handleLeftShift(b, event);
-      break;
     case 'ShiftRight':
-      Special.handleRightShift(b, event);
+      Special.handleShift(b, event);
       break;
     case 'AltLeft':
-      Special.handleLeftAlt(b);
-      break;
     case 'AltRight':
-      Special.handleRightAlt(b);
+      Data.changeKeyState('onAlt', b);
       break;
     case 'CapsLock':
-      if (event.type !== 'keyup') Special.handleCaps(event);
+      if (event.type !== 'keyup') Special.handleCaps();
       break;
     case 'ControlLeft':
-      Special.handleLeftControl(b, event);
-      break;
     case 'ControlRight':
-      Special.handleRightControl(b, event);
+      Data.changeKeyState('onControl', b);
       break;
     default:
   }
